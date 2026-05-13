@@ -2,8 +2,8 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const api = axios.create({
-  baseURL: //'http://localhost:5059',
-  'https://danielhernanrpgapi.azurewebsites.net',
+  baseURL: 'http://localhost:5059',
+  //'https://danielhernanrpgapi.azurewebsites.net',
 });
 
 export const authService = {
