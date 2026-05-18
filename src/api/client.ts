@@ -4,8 +4,8 @@ import * as SecureStore from 'expo-secure-store';
 // ─── Troque pelo IP da sua máquina na rede local ──────────
 // Windows: rode "ipconfig" no terminal → use o IPv4
 // Mac/Linux: ifconfig | grep inet
-//export const BASE_URL = 'https://danielhernanrpgapi.azurewebsites.net';
-export const BASE_URL = 'http://localhost:5059';
+export const BASE_URL = 'https://danielhernanrpgapi.azurewebsites.net';
+//export const BASE_URL = 'http://localhost:5059';
 
 
 const api = axios.create({
