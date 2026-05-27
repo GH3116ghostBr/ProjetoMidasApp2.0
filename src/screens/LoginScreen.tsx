@@ -14,6 +14,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors, FontSize, Radius, Shadow, Spacing } from '../styles/theme';
 import { useAuth } from '../context/AuthContext';
+import { Button } from '../components/Button';
 
 interface Props {
   onGoRegister: () => void;
@@ -88,7 +89,22 @@ export function LoginScreen({ onGoRegister }: Props) {
               Use seu usuário e senha para visualizar indicadores, confirmar projetados e monitorar empréstimos.
             </Text>
 
-            <View style={styles.fieldGroup}>
+            <Input
+            label="Usuário"
+            placeholder="Digite seu usuário"
+            value={usuario}
+            onChangeText={setUsuario}
+            />
+
+            <Input
+            label="Senha"
+            placeholder="Digite sua senha"
+            value={senha}
+            onChangeText={setSenha}
+            secureTextEntry
+            />
+            
+            {/*</View><View style={styles.fieldGroup}>
               <Text style={styles.fieldLabel}>Usuário</Text>
               <TextInput
                 style={styles.input}
@@ -99,7 +115,7 @@ export function LoginScreen({ onGoRegister }: Props) {
                 autoCapitalize="none"
                 autoCorrect={false}
               />
-            </View>
+            </View>*/}
 
             <View style={styles.fieldGroup}>
               <Text style={styles.fieldLabel}>Senha</Text>
@@ -114,35 +130,16 @@ export function LoginScreen({ onGoRegister }: Props) {
             </View>
 
             {/* Botão primário */}
-            <TouchableOpacity
-              style={[styles.btnPrimary, loading && styles.btnDisabled]}
+            <Button
+              title="Entrar no painel"
               onPress={handleLogin}
-              disabled={loading}
-              activeOpacity={0.85}
-            >
-              <LinearGradient
-                colors={['#ff3554', '#8f061d']}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-                style={styles.btnGradient}
-              >
-                {loading ? (
-                  <ActivityIndicator color="#fff" />
-                ) : (
-                  <Text style={styles.btnPrimaryText}>Entrar no painel →</Text>
-                )}
-              </LinearGradient>
-            </TouchableOpacity>
+              loading={loading}
+            />
 
             {/* Botão secundário */}
-            <TouchableOpacity style={styles.btnSecondary} onPress={onGoRegister} activeOpacity={0.75}>
-              <Text style={styles.btnSecondaryText}>Criar conta</Text>
-            </TouchableOpacity>
-          </View>
-
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </LinearGradient>
+           <Button
+            title="Criar conta"
+            onPress={onGoRegister}/>
   );
 }
 
