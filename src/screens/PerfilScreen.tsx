@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import {useState } from 'react';
 import {
   Alert,
   KeyboardAvoidingView,
@@ -14,6 +14,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Colors, FontSize, Radius, Shadow, Spacing } from '../styles/theme';
 import { authService } from '../api/services';
 import { useAuth } from '../context/AuthContext';
+import React from 'react';
 
 export function PerfilScreen() {
   const { userName, logout } = useAuth();

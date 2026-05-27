@@ -6,6 +6,31 @@ const api = axios.create({
   //'https://danielhernanrpgapi.azurewebsites.net',
 });
 
+export const lancamentosService = {
+    async getByMes(ano: number, mes: number) {
+    const response = await api.get('/lancamentos/mes', {
+      params: { ano, mes },
+    });
+
+    return response.data;
+  },
+
+  async getSomatoria() {
+    const response = await api.get('/lancamentos/somatoria');
+
+    return response.data;
+  },}
+export const projecoesService = {
+   async getByMes(ano: number, mes: number) {
+    const response = await api.get('/projecoes/mes', {
+      params: { ano, mes },
+    });
+
+    return response.data;
+  },
+}
+
+
 export const authService = {
 
   // =========================

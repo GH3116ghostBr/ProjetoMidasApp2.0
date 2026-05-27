@@ -13,7 +13,7 @@ import { Colors, FontSize, Radius, Shadow, Spacing } from '../styles/theme';
 import { lancamentosService, projecoesService } from '../api/services';
 import { useAuth } from '../context/AuthContext';
 import type { Lancamento, Projecao } from '../types';
-
+import { HeroCard } from '../components/dashboard/HeroCard';
 // ── Helpers ────────────────────────────────────────────────
 const formatBRL = (v: number) =>
   v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -88,36 +88,12 @@ export function DashboardScreen({ onNavigate }: Props) {
       }
     >
       {/* ── Hero card ─────────────────────────────────────── */}
-      <LinearGradient
-        colors={['#2a0208', '#530816', '#220206']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.heroCard}
-      >
-        <Text style={styles.heroEye}>FINTECH COCKPIT</Text>
-        <Text style={styles.heroTitle}>
-          Olá, {userName ?? 'Midas'} 👋
-        </Text>
-        <Text style={styles.heroSub}>
-          Saldo acumulado de todos os lançamentos
-        </Text>
-        <Text style={styles.heroBalance}>{formatBRL(somatoria)}</Text>
-
-        <View style={styles.heroBtns}>
-          <TouchableOpacity
-            style={styles.heroBtnWhite}
-            onPress={() => onNavigate('NovoLancamento')}
-          >
-            <Text style={styles.heroBtnWhiteText}>+ Lançamento</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.heroBtnGold}
-            onPress={() => onNavigate('NovaProjecao')}
-          >
-            <Text style={styles.heroBtnGoldText}>+ Projeção</Text>
-          </TouchableOpacity>
-        </View>
-      </LinearGradient>
+      <HeroCard
+  userName={no meUsuario}
+  balance={somatoria}
+  onNovoLancamento={() => onNavigate('NovoLancamento')}
+  onNovaProjecao={() => onNavigate('NovaProjecao')}
+/>
 
       {/* ── Cards de métricas ─────────────────────────────── */}
       <View style={styles.metricsRow}>
