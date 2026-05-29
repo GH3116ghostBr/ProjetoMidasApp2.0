@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   TouchableOpacity,
   Text,
@@ -18,8 +19,8 @@ export function Button({
   onPress,
   loading = false,
   disabled = false,
-}: ButtonProps)
-return (
+}: ButtonProps) {
+  return (
     <TouchableOpacity
       style={[styles.button, disabled && styles.disabled]}
       onPress={onPress}
@@ -34,6 +35,7 @@ return (
     </TouchableOpacity>
   );
 }
+
 const styles = StyleSheet.create({
   button: {
     height: 50,
