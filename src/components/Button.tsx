@@ -20,7 +20,12 @@ export function Button({
   loading = false,
   disabled = false,
 }: ButtonProps) {
+<<<<<<< HEAD
   return (
+=======
+
+return (
+>>>>>>> 5908e8681326654ae5f7f4c4c715198c831553ee
     <TouchableOpacity
       style={[styles.button, disabled && styles.disabled]}
       onPress={onPress}
