@@ -14,10 +14,10 @@ import { Colors, FontSize, Spacing } from '../styles/theme';
 import { lancamentosService, projecoesService } from '../api/services';
 import type { Lancamento, Projecao } from '../types';
 
-import { HeroCard } from '../Components/Dashboard/HeroCard';
-import { MetricsGrid } from '../Components/Dashboard/MetricsGrid';
-import { TransactionsList } from '../Components/Dashboard/TransactionsList';
-import { SectionHeader } from '../Components/Dashboard/SectionHeader';
+import { HeroCard } from '../components/Dashboard/HeroCard';
+import { MetricsGrid } from '../components/Dashboard/MetricsGrid';
+import { TransactionsList } from '../components/Dashboard/TransactionsList';
+import { SectionHeader } from '../components/Dashboard/SectionHeader';
 
 
 // ── helpers ─────────────────────────────
