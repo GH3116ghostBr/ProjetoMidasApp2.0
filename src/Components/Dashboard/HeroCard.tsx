@@ -14,7 +14,8 @@ import {
   Shadow,
   Spacing,
 } from '../../styles/theme';
-import React = require('react');
+//import React = require('react');
+import React from 'react';
 
 interface Props {
   userName?: string;
