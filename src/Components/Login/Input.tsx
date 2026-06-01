@@ -1,13 +1,6 @@
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput,
+   TextInputProps, StyleSheet, } from 'react-native';
 import React from 'react';
-import {
-  Text,
-  TextInput,
-  TextInputProps,
-  View,
-  StyleSheet,
-} from 'react-native';
-
 import {
   Colors,
   FontSize,
