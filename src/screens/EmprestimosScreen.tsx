@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 import { Colors, FontSize, Radius, Shadow, Spacing } from '../styles/theme';
-import { emprestimosService } from '../api/services';
+import { emprestimosService } from '../api/client';
 import type { Emprestimo } from '../types';
 
 import { EmprestimosButton } from '../Components/Emprestimos/EmprestimosButton';
