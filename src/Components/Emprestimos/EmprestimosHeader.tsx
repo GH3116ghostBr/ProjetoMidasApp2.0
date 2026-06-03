@@ -6,7 +6,7 @@ import {
   Colors,
   FontSize,
   Spacing,
-} from '../styles/theme';
+} from '../../styles/theme';
 
 interface Props {
   onVoltar: () => void;

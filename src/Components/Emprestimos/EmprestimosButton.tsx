@@ -14,7 +14,7 @@ import {
   FontSize,
   Radius,
   Shadow,
-} from '../styles/theme';
+} from '../../styles/theme';
 
 interface Props extends TouchableOpacityProps {
   title: string;

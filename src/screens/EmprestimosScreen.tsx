@@ -15,9 +15,9 @@ import { Colors, FontSize, Radius, Shadow, Spacing } from '../styles/theme';
 import { emprestimosService } from '../api/client';
 import type { Emprestimo } from '../types';
 
-import { EmprestimosButton } from '../Components/Emprestimos/EmprestimosButton';
-import { EmprestimosHeader } from '../Components/Emprestimos/EmprestimosHeader';
-import { EmprestimosSimulacao } from '../Components/Emprestimos/EmprestimosSimulacao';
+import { EmprestimosButton } from '../components/Emprestimos/EmprestimosButton';
+import { EmprestimosHeader } from '../components/Emprestimos/EmprestimosHeader';
+import { EmprestimosSimulacao } from '../components/Emprestimos/EmprestimosSimulacao';
 
 interface Props {
   onVoltar: () => void;

@@ -12,9 +12,9 @@ import {
   Radius,
   Shadow,
   Spacing,
-} from '../styles/theme';
+} from '../../styles/theme';
 
-import type { Emprestimo } from '../types';
+import type { Emprestimo } from '../../types';
 
 interface Props {
   resultado: Emprestimo;
