@@ -6,16 +6,16 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { Colors, FontSize, Radius, Shadow, Spacing } from '../styles/theme';
 import { lancamentosService } from '../api/services';
+import { NovoLancamentoHeader } from '../components/NovoLancamento/NovoLancamentoHeader';
+import { TipoSelector } from '../components/NovoLancamento/TipoSeletor';
+import { Input } from '../components/Login/Input';
+import { Button } from '../components/Login/Button';
 
 interface Props { onSalvo: () => void; onVoltar: () => void; }
-
 export function NovoLancamentoScreen({ onSalvo, onVoltar }: Props) {
   const [descricao, setDescricao] = useState('');
   const [valor,     setValor]     = useState('');
@@ -42,115 +42,60 @@ export function NovoLancamentoScreen({ onSalvo, onVoltar }: Props) {
   return (
     <View style={styles.root}>
       {/* Header */}
-      <LinearGradient colors={['#2a0208', '#530816']} style={styles.headerGrad}>
-        <TouchableOpacity onPress={onVoltar} style={styles.backBtn}>
-          <Text style={styles.backText}>← Voltar</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerEye}>NOVO</Text>
-        <Text style={styles.headerTitle}>Registrar lançamento</Text>
-      </LinearGradient>
+      <NovoLancamentoHeader
+      onVoltar={onVoltar}
+      />
 
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.flex}>
         <ScrollView contentContainerStyle={styles.form} keyboardShouldPersistTaps="handled">
 
           {/* Tipo — Receita / Despesa */}
           <Text style={styles.label}>Tipo</Text>
-          <View style={styles.toggleRow}>
-            {(['Receita', 'Despesa'] as const).map((t) => (
-              <TouchableOpacity
-                key={t}
-                style={[styles.toggleBtn, tipo === t && styles.toggleBtnActive(t)]}
-                onPress={() => setTipo(t)}
-              >
-                <Text style={[styles.toggleText, tipo === t && styles.toggleTextActive]}>
-                  {t === 'Receita' ? '↑ Receita' : '↓ Despesa'}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
+          <TipoSelector
+            value={tipo}
+            onChange={setTipo}
+          />
 
           <Text style={styles.label}>Descrição *</Text>
-          <TextInput
-            style={styles.input}
+          <Input
+            label="Descrição *"
             placeholder="Ex: Salário, Aluguel, Supermercado..."
-            placeholderTextColor={Colors.textMuted}
             value={descricao}
             onChangeText={setDescricao}
           />
 
-          <Text style={styles.label}>Valor (R$) *</Text>
-          <TextInput
-            style={styles.input}
+          <Input
+            label="Valor (R$) *"
             placeholder="0,00"
-            placeholderTextColor={Colors.textMuted}
             value={valor}
             onChangeText={setValor}
             keyboardType="decimal-pad"
           />
 
           <Text style={styles.label}>Data</Text>
-          <TextInput
-            style={styles.input}
+          <Input
+            label="Data"
             placeholder="AAAA-MM-DD"
-            placeholderTextColor={Colors.textMuted}
             value={data}
             onChangeText={setData}
           />
 
-          <TouchableOpacity
-            style={[styles.btn, loading && { opacity: 0.6 }]}
+          <Button
+            title="Salvar lançamento"
             onPress={salvar}
-            disabled={loading}
-          >
-            <LinearGradient colors={['#ff3554', '#8f061d']} style={styles.btnGrad}>
-              <Text style={styles.btnText}>{loading ? 'Salvando...' : 'Salvar lançamento'}</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-
+            loading={loading}
+          />
         </ScrollView>
       </KeyboardAvoidingView>
     </View>
   );
 }
 
-// helper para estilo dinâmico
-const toggleBtnActiveStyle = (tipo: 'Receita' | 'Despesa') => ({
-  backgroundColor: tipo === 'Receita' ? Colors.successBg : Colors.dangerBg,
-  borderColor:     tipo === 'Receita' ? Colors.success    : Colors.danger,
-});
-
 const styles = StyleSheet.create({
   root:       { flex: 1, backgroundColor: '#faf5f6' },
   flex:       { flex: 1 },
-  headerGrad: { paddingTop: 56, paddingBottom: Spacing.xl2, paddingHorizontal: Spacing.xl },
-  backBtn:    { marginBottom: Spacing.md },
-  backText:   { color: Colors.goldLight, fontSize: FontSize.base, fontWeight: '600' },
-  headerEye:  { fontSize: FontSize.xs, letterSpacing: 4, color: Colors.white55, fontWeight: '700', marginBottom: 4 },
-  headerTitle:{ fontSize: FontSize.xl3, fontWeight: '800', color: '#fff' },
 
   form:    { padding: Spacing.xl },
   label:   { fontSize: FontSize.base, fontWeight: '700', color: Colors.textPrimary, marginBottom: Spacing.xs, marginTop: Spacing.lg },
-  input:   {
-    height: 50, borderRadius: Radius.xl,
-    borderWidth: 1, borderColor: Colors.border,
-    backgroundColor: '#fff',
-    paddingHorizontal: Spacing.lg,
-    fontSize: FontSize.base, color: Colors.textPrimary,
-    ...Shadow.card,
-  },
 
-  toggleRow:      { flexDirection: 'row', gap: Spacing.md },
-  toggleBtn:      {
-    flex: 1, height: 48, borderRadius: Radius.xl,
-    borderWidth: 1, borderColor: Colors.border,
-    backgroundColor: '#fff',
-    alignItems: 'center', justifyContent: 'center',
-  },
-  toggleBtnActive: (t: 'Receita' | 'Despesa') => toggleBtnActiveStyle(t),
-  toggleText:     { fontSize: FontSize.base, fontWeight: '600', color: Colors.textMuted },
-  toggleTextActive:{ color: Colors.textPrimary },
-
-  btn:    { marginTop: Spacing.xl2, borderRadius: Radius.xl, overflow: 'hidden', ...Shadow.btn },
-  btnGrad:{ height: 52, alignItems: 'center', justifyContent: 'center' },
-  btnText:{ color: '#fff', fontSize: FontSize.md, fontWeight: '700' },
 });
