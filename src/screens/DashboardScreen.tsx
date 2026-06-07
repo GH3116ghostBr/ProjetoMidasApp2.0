@@ -1,31 +1,23 @@
 import React from 'react';
 import { useState, useEffect, useCallback } from 'react';
-import {
-  ActivityIndicator,
-  RefreshControl,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
-
+import { ActivityIndicator, RefreshControl, ScrollView, Text, View, } from 'react-native';
 import { useAuth } from '../context/AuthContext';
-import { Colors, FontSize, Spacing } from '../styles/theme';
-
-import { lancamentosService, projecoesService } from '../api/services';
+import { Colors, Spacing } from '../styles/theme';
+import { lancamentosService } from '../services/lancamentos/lancamentosServices';
+import { projecoesService } from '../services/projecoes/projecoesServices';
 import type { Lancamento, Projecao } from '../types';
-
 import { HeroCard } from '../components/Dashboard/HeroCard';
 import { MetricsGrid } from '../components/Dashboard/MetricsGrid';
 import { TransactionsList } from '../components/Dashboard/TransactionsList';
 import { SectionHeader } from '../components/Dashboard/SectionHeader';
 
+import {
+  formatBRL,
+  formatData,
+} from '../utils';
+
 
 // ── helpers ─────────────────────────────
-const formatBRL = (v: number) =>
-  v.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  });
 
 export function DashboardScreen({ onNavigate }: any) {
   const { userName } = useAuth();

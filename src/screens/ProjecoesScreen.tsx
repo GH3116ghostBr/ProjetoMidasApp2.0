@@ -1,21 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  RefreshControl,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors, FontSize, Radius, Shadow, Spacing } from '../styles/theme';
 import { projecoesService } from '../api/services';
 import type { Projecao } from '../types';
-
-const formatBRL  = (v: number) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-const formatData = (iso: string) =>
-  new Date(iso).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+import {formatBRL, formatData,} from '../utils';
 
 const meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
 

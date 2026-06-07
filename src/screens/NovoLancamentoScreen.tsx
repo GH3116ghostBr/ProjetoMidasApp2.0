@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
-import {
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View,} from 'react-native';
 import { Colors, FontSize, Radius, Shadow, Spacing } from '../styles/theme';
-import { lancamentosService } from '../api/services';
+import { lancamentosService } from '../services/lancamentos/LancamentosServices';
 import { NovoLancamentoHeader } from '../components/NovoLancamento/NovoLancamentoHeader';
 import { TipoSelector } from '../components/NovoLancamento/TipoSeletor';
 import { Input } from '../components/Login/Input';
 import { Button } from '../components/Login/Button';
+import { LancamentoForm } from '../components/NovoLancamento/LancamentoForm';
 
 interface Props { onSalvo: () => void; onVoltar: () => void; }
 export function NovoLancamentoScreen({ onSalvo, onVoltar }: Props) {
@@ -47,45 +40,18 @@ export function NovoLancamentoScreen({ onSalvo, onVoltar }: Props) {
       />
 
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.flex}>
-        <ScrollView contentContainerStyle={styles.form} keyboardShouldPersistTaps="handled">
-
-          {/* Tipo — Receita / Despesa */}
-          <Text style={styles.label}>Tipo</Text>
-          <TipoSelector
-            value={tipo}
-            onChange={setTipo}
-          />
-
-          <Text style={styles.label}>Descrição *</Text>
-          <Input
-            label="Descrição *"
-            placeholder="Ex: Salário, Aluguel, Supermercado..."
-            value={descricao}
-            onChangeText={setDescricao}
-          />
-
-          <Input
-            label="Valor (R$) *"
-            placeholder="0,00"
-            value={valor}
-            onChangeText={setValor}
-            keyboardType="decimal-pad"
-          />
-
-          <Text style={styles.label}>Data</Text>
-          <Input
-            label="Data"
-            placeholder="AAAA-MM-DD"
-            value={data}
-            onChangeText={setData}
-          />
-
-          <Button
-            title="Salvar lançamento"
-            onPress={salvar}
-            loading={loading}
-          />
-        </ScrollView>
+        <LancamentoForm
+          tipo={tipo}
+          descricao={descricao}
+          valor={valor}
+          data={data}
+          loading={loading}
+          onTipoChange={setTipo}
+          onDescricaoChange={setDescricao}
+          onValorChange={setValor}
+          onDataChange={setData}
+          onSalvar={salvar}
+        />
       </KeyboardAvoidingView>
     </View>
   );

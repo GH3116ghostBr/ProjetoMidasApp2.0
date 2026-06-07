@@ -5,7 +5,7 @@ import React, {
   useState,
 } from 'react';
 
-import { authService } from '../api/services';
+import { authService } from '../services/auth/AuthServices';
 
 interface AuthContextData {
   token: string | null;
