@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import { Colors, FontSize, Radius, Shadow, Spacing } from '../styles/theme';
-import { lancamentosService } from '../services/lancamentos/LancamentosServices';
+import { lancamentosService } from '../services/lancamentos/lancamentosServices';
 import type { Lancamento } from '../types';
 import { LancamentoCard } from '../components/Lancamentos/LancamentoCard';
 import { SearchInput } from '../components/Lancamentos/SearchInput';

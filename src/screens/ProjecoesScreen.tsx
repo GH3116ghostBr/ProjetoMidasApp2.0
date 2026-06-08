@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors, FontSize, Radius, Shadow, Spacing } from '../styles/theme';
-import { projecoesService } from '../api/services';
+import { projecoesService } from '../services/projecoes/projecoesServices';
 import type { Projecao } from '../types';
 import {formatBRL, formatData,} from '../utils';
 

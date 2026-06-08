@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View,} from 'react-native';
 import { Colors, FontSize, Radius, Shadow, Spacing } from '../styles/theme';
-import { lancamentosService } from '../services/lancamentos/LancamentosServices';
+import { lancamentosService } from '../services/lancamentos/lancamentosServices';
 import { NovoLancamentoHeader } from '../components/NovoLancamento/NovoLancamentoHeader';
 import { TipoSelector } from '../components/NovoLancamento/TipoSeletor';
 import { Input } from '../components/Login/Input';

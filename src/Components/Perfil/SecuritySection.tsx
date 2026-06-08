@@ -15,7 +15,7 @@ import {
   Shadow,
   Spacing,
 } from '../../styles/theme';
-import { authService } from '../../api/services';
+import { authService } from '../../services/auth/AuthServices';
 
 interface Props {
   userName?: string;
