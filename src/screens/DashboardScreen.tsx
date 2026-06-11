@@ -60,10 +60,18 @@ export function DashboardScreen({ onNavigate }: any) {
         : []
     );
 
-    setSomatoria(
-      soma.status === 'fulfilled'
-        ? soma.value
-        : 0
+    if (soma.status === 'fulfilled') {
+      setSomatoria(
+        Number(soma.value?.saldo ?? 0)
+    );
+      } else {
+      setSomatoria(0);
+    }
+
+        console.log('SOMATORIA →', soma);
+      console.log('VALOR →', soma.status === 'fulfilled'
+      ? soma.value
+      : 0
     );
 
     if (lancs.status === 'rejected') {

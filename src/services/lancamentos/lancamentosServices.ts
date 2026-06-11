@@ -35,23 +35,17 @@ export const lancamentosService = {
 }  },
 
   async getSomatoria() {
-    try {
-      const response =
-        await api.get(
-          '/lancamentos/somatoria'
-        );
+  const response =
+    await api.get(
+      '/lancamentos/somatoria'
+    );
 
-      return response.data;
+  console.log(
+    response.data
+  );
 
-    } catch (err: any) {
-      console.log(
-        'ERRO SOMATORIA →',
-        err.response?.data
-      );
-
-      throw err;
-    }
-  },
+  return response.data;
+},
 
   async criar(data: any) {
     const response =
