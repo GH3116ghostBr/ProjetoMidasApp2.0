@@ -1,11 +1,16 @@
 import React from 'react';
-import { Alert, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  Alert,
+  Platform,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
+
 import {
   Colors,
   FontSize,
   Radius,
-  Shadow,
-  Spacing,
 } from '../../styles/theme';
 
 interface Props {
@@ -14,10 +19,30 @@ interface Props {
 
 export function LogoutButton({ logout }: Props) {
   const handleLogout = () => {
-    Alert.alert('Sair do Midas', 'Deseja encerrar a sessão?', [
-      { text: 'Cancelar', style: 'cancel' },
-      { text: 'Sair', style: 'destructive', onPress: logout },
-    ]);
+    if (Platform.OS === 'web') {
+      const confirmar = window.confirm(
+        'Deseja encerrar a sessão?'
+      );
+
+      if (confirmar) {
+        logout();
+      }
+
+      return;
+    }
+
+    Alert.alert(
+      'Sair do Midas',
+      'Deseja encerrar a sessão?',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Sair',
+          style: 'destructive',
+          onPress: logout,
+        },
+      ]
+    );
   };
 
   return (

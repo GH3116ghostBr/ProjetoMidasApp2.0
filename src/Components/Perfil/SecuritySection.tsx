@@ -16,6 +16,7 @@ import {
   Spacing,
 } from '../../styles/theme';
 import { authService } from '../../services/auth/AuthServices';
+import { showAlert} from '../../utils/alert';
 
 interface Props {
   userName?: string;
@@ -28,17 +29,26 @@ export function SecuritySection({ userName }: Props) {
 
   const handleAlterarSenha = async () => {
     if (!novaSenha.trim()) {
-      Alert.alert('Atenção', 'Informe a nova senha.');
+        showAlert(
+          'Atenção',
+          'Informe a nova senha.'
+        );
       return;
     }
 
     if (novaSenha !== confirmar) {
-      Alert.alert('Atenção', 'As senhas não coincidem.');
+      showAlert(
+        'Atenção',
+        'As senhas não coincidem.'
+      );
       return;
     }
 
     if (novaSenha.length < 4) {
-      Alert.alert('Atenção', 'Senha muito curta (mín. 4 caracteres).');
+      showAlert(
+        'Atenção',
+        'Senha muito curta (mín. 4 caracteres).'
+      );
       return;
     }
 
@@ -47,12 +57,12 @@ export function SecuritySection({ userName }: Props) {
     try {
       await authService.alterarSenha(userName!, novaSenha);
 
-      Alert.alert('Sucesso', 'Senha alterada com sucesso!');
+      showAlert('Sucesso', 'Senha alterada com sucesso!');
 
       setNovaSenha('');
       setConfirmar('');
     } catch (e: any) {
-      Alert.alert(
+      showAlert(
         'Erro',
         e?.response?.data || 'Não foi possível alterar a senha.'
       );

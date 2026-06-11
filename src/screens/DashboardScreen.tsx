@@ -29,11 +29,14 @@ export function DashboardScreen({ onNavigate }: any) {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
-  const load = useCallback(async () => {
-    try {
-      const hoje = new Date();
+ const load = useCallback(async () => {
+  setLoading(true);
 
-      const [lancs, prjs, soma] = await Promise.all([
+  try {
+    const hoje = new Date();
+
+    const [lancs, prjs, soma] =
+      await Promise.allSettled([
         lancamentosService.getByMes(
           hoje.getFullYear(),
           hoje.getMonth() + 1
@@ -45,18 +48,57 @@ export function DashboardScreen({ onNavigate }: any) {
         lancamentosService.getSomatoria(),
       ]);
 
-      setLancamentos(lancs);
-      setProjecoes(prjs);
-      setSomatoria(soma);
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
-    }
-  }, []);
+    setLancamentos(
+      lancs.status === 'fulfilled'
+        ? lancs.value
+        : []
+    );
 
-  useEffect(() => {
-    load();
-  }, [load]);
+    setProjecoes(
+      prjs.status === 'fulfilled'
+        ? prjs.value
+        : []
+    );
+
+    setSomatoria(
+      soma.status === 'fulfilled'
+        ? soma.value
+        : 0
+    );
+
+    if (lancs.status === 'rejected') {
+      console.log(
+        'LANCAMENTOS',
+        lancs.reason?.response?.data
+      );
+    }
+
+    if (prjs.status === 'rejected') {
+      console.log(
+        'PROJECOES',
+        prjs.reason?.response?.data
+      );
+    }
+
+    if (soma.status === 'rejected') {
+      console.log(
+        'SOMATORIA',
+        soma.reason?.response?.data
+      );
+    }
+
+  } finally {
+    setLoading(false);
+    setRefreshing(false);
+  }
+}, []);
+
+useEffect(() => {
+  load();
+}, [load]);
+
+  // -------------------------------------------
+
 
   // ── cálculos ───────────────────────────
   const totalEntradas = lancamentos
